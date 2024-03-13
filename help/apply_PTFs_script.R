@@ -19,6 +19,7 @@ library (readr)
 # load data with predictors -> now it is a sample dataset
 urlfile <- "https://raw.githubusercontent.com/TothSzaboBrigitta/euptfv2/master/help/data_sample.csv"
 new_data <- read_csv2(url(urlfile))
+new_data <- read_csv2("help/data_sample.csv")
 
 # check available predictors in your dataset
 names(new_data)
@@ -26,6 +27,7 @@ names(new_data)
 # find which PTFs are recommended for given set of available predictors
 urlfile <- "https://raw.githubusercontent.com/TothSzaboBrigitta/euptfv2/master/suggested_PTFs/list_of_final_PTFs.csv"
 list_PTFs <- read_csv2(url(urlfile))
+list_PTFs <- read_csv2("suggested_PTFs/list_of_final_PTFs.csv")
 View(list_PTFs)
 # available predictors in "new_data": USSAND USSILT USCLAY DEPTH_M OC BD CACO3 PH_H2O CEC
 # row 32 includes recommended PTFs
@@ -36,7 +38,7 @@ View(list_PTFs)
 
 # load prediction algorithm
 source_data("https://github.com/TothSzaboBrigitta/euptfv2/blob/master/suggested_PTFs/FC_EUHYDI/FC_PTF07.rdata?raw=True")
-
+load("suggested_PTFs/FC_EUHYDI/FC_PTF07.rdata")
 FC <- predict(FC_PTF07,
               data=new_data,
               type = "response",
@@ -58,7 +60,7 @@ source_data("https://github.com/TothSzaboBrigitta/euptfv2/blob/master/suggested_
 source_data("https://github.com/TothSzaboBrigitta/euptfv2/blob/master/suggested_PTFs/MV_EUHYDI/MVG_log10N_1_PTF27.rdata?raw=True")
 source_data("https://github.com/TothSzaboBrigitta/euptfv2/blob/master/suggested_PTFs/MV_EUHYDI/MVG_L_PTF27.rdata?raw=True")
 source_data("https://github.com/TothSzaboBrigitta/euptfv2/blob/master/suggested_PTFs/MV_EUHYDI/MVG_log10K0_PTF27.rdata?raw=True")
-
+load("suggested_PTFs/MV_EUHYDI/MVG_THS_PTF27.rdata")
 
 MVG_THS <- predict(MVG_THS_PTF27,
                    data=new_data,
