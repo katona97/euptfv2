@@ -33,7 +33,6 @@ View(list_PTFs)
 ## prediction of field capacity (FC) with PTF07
 
 # load prediction algorithm
-source_data("https://github.com/TothSzaboBrigitta/euptfv2/blob/master/suggested_PTFs/FC_EUHYDI/FC_PTF07.rdata?raw=True")
 load("suggested_PTFs/FC_EUHYDI/FC_PTF07.rdata")
 FC <- predict(FC_PTF07,
               data=new_data,
