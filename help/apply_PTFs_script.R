@@ -48,13 +48,7 @@ new_data_pred <- cbind(new_data, FC)
 ### b) predict response with uncertainty ----
 ## prediction of Mualem-van Genuchten parameters (MVG) with PTF27
 
-# load all prediction algorithms
-source_data("https://github.com/TothSzaboBrigitta/euptfv2/blob/master/suggested_PTFs/MV_EUHYDI/MVG_THS_PTF27.rdata?raw=True")
-source_data("https://github.com/TothSzaboBrigitta/euptfv2/blob/master/suggested_PTFs/MV_EUHYDI/MVG_log10THR_1_PTF27.rdata?raw=True")
-source_data("https://github.com/TothSzaboBrigitta/euptfv2/blob/master/suggested_PTFs/MV_EUHYDI/MVG_log10ALP_PTF27.rdata?raw=True")
-source_data("https://github.com/TothSzaboBrigitta/euptfv2/blob/master/suggested_PTFs/MV_EUHYDI/MVG_log10N_1_PTF27.rdata?raw=True")
-source_data("https://github.com/TothSzaboBrigitta/euptfv2/blob/master/suggested_PTFs/MV_EUHYDI/MVG_L_PTF27.rdata?raw=True")
-source_data("https://github.com/TothSzaboBrigitta/euptfv2/blob/master/suggested_PTFs/MV_EUHYDI/MVG_log10K0_PTF27.rdata?raw=True")
+# load prediction algorithms
 load("suggested_PTFs/MV_EUHYDI/MVG_THS_PTF27.rdata")
 
 MVG_THS <- predict(MVG_THS_PTF27,
@@ -65,7 +59,7 @@ MVG_THS <- predict(MVG_THS_PTF27,
                    num.threads = detectCores()-1)
 MVG_THS <- as.data.frame(MVG_THS$predictions)
 
-
+load("suggested_PTFs/MV_EUHYDI/MVG_log10THR_1_PTF27.rdata")
 MVG_log10THR_1 <- predict(MVG_log10THR_1_PTF27,
                           data=new_data,
                           type = "quantiles",
@@ -76,7 +70,7 @@ MVG_log10THR_1 <- as.data.frame(MVG_log10THR_1$predictions)
 trans_log10_1 <- function(x) {(10^(x))-1}
 MVG_THR <- sapply(MVG_log10THR_1[, c(1:3)], trans_log10_1)
 
-
+load("suggested_PTFs/MV_EUHYDI/MVG_log10ALP_PTF27.rdata")
 MVG_log10ALP <- predict(MVG_log10ALP_PTF27,
                         data=new_data,
                         type = "quantiles",
@@ -88,6 +82,7 @@ trans_log10 <- function(x) {10^(x)}
 MVG_ALP <- sapply(MVG_log10ALP[, c(1:3)], trans_log10)
 
 
+load("suggested_PTFs/MV_EUHYDI/MVG_log10N_1_PTF27.rdata")
 MVG_log10N_1 <- predict(MVG_log10N_1_PTF27,
                         data=new_data,
                         type = "quantiles",
@@ -102,7 +97,7 @@ MVG_N <- sapply(MVG_log10N_1[, c(1:3)], trans_log10_p1)
 calc_m <- function(x) {1-1/x}
 MVG_M <- sapply(as.data.frame(MVG_N[, c(1:3)]), calc_m)
 
-
+load("suggested_PTFs/MV_EUHYDI/MVG_log10K0_PTF27.rdata")
 MVG_log10K0 <- predict(MVG_log10K0_PTF27,
                        data=new_data,
                        type = "quantiles",
@@ -114,6 +109,7 @@ trans_log10 <- function(x) {10^(x)}
 MVG_K0 <- sapply(MVG_log10K0[, c(1:3)], trans_log10)
 
 
+load("suggested_PTFs/MV_EUHYDI/MVG_L_PTF27.rdata")
 MVG_L <- (predict(MVG_L_PTF27,
                  data=new_data,
                  type = "quantiles",
