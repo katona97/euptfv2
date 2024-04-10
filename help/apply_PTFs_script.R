@@ -23,8 +23,6 @@ new_data <- read_csv2("help/data_sample.csv")
 names(new_data)
 
 # find which PTFs are recommended for given set of available predictors
-urlfile <- "https://raw.githubusercontent.com/TothSzaboBrigitta/euptfv2/master/suggested_PTFs/list_of_final_PTFs.csv"
-list_PTFs <- read_csv2(url(urlfile))
 list_PTFs <- read_csv2("suggested_PTFs/list_of_final_PTFs.csv")
 View(list_PTFs)
 # available predictors in "new_data": USSAND USSILT USCLAY DEPTH_M OC BD CACO3 PH_H2O CEC
