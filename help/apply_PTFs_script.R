@@ -17,8 +17,6 @@ library (readr)
 
 
 # load data with predictors -> now it is a sample dataset
-urlfile <- "https://raw.githubusercontent.com/TothSzaboBrigitta/euptfv2/master/help/data_sample.csv"
-new_data <- read_csv2(url(urlfile))
 new_data <- read_csv2("help/data_sample.csv")
 
 # check available predictors in your dataset
