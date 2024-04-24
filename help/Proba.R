@@ -34,3 +34,12 @@ new_data_pred2 <- cbind(new_data, FC)
 
 ## Compare
 cbind(new_data_pred$FC, new_data_pred2$FC)
+
+load("suggested_PTFs/WP_EUHYDI/WP_PTF02.rdata")
+WP <- predict(WP_PTF02,
+              data=new_data,
+              type = "response",
+              num.threads = detectCores()-1)
+WP <- WP$predictions
+WP
+WP_PTF02
