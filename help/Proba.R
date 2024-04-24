@@ -31,3 +31,6 @@ FC <- FC$predictions
 
 # add predicted values to the input dataset
 new_data_pred2 <- cbind(new_data, FC)
+
+## Compare
+cbind(new_data_pred$FC, new_data_pred2$FC)
